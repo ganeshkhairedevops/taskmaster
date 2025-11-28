@@ -6,12 +6,20 @@ services:
     ports:
       - "5000:5000"
     environment:
-      - REDIS_HOST=redis
+      - DATABASE_URL=postgresql://taskuser:taskpass@db:5432/taskdb
     depends_on:
-      - redis
+      - db
 
-
-  redis:
-    image: redis:7-alpine
+  db:
+    image: postgres:15-alpine
+    environment:
+      - POSTGRES_DB=taskdb
+      - POSTGRES_USER=taskuser
+      - POSTGRES_PASSWORD=taskpass
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
     ports:
-      - "6379:6379"
+      - "5432:5432"
+
+volumes:
+  postgres_data:

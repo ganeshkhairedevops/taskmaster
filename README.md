@@ -1,21 +1,25 @@
-# TaskMaster Pro - Version 1 (Basic)
+# TaskMaster Pro - Version 2 (Enhanced UI)
 
-Simple Flask application with Redis for visit counting.
+Beautiful task management system with modern UI and PostgreSQL database.
 
 ## Features
-- Basic Flask web server
-- Redis integration for visit counting
-- Docker containerization
-- Health check endpoint
+- Modern glassmorphism UI design
+- Full CRUD task management
+- PostgreSQL database
+- Priority levels and status tracking
+- Responsive design
+- Real-time statistics
 
 ## Quick Start
 ```bash
 docker-compose up -d
 ```
 
-## Endpoints
-- `/` - Shows visit count
-- `/health` - Health check
-
 ## Access
 - http://localhost:5000
+
+## API Endpoints
+- `GET /api/tasks` - List tasks
+- `POST /api/tasks` - Create task
+- `PUT /api/tasks/{id}` - Update task
+- `DELETE /api/tasks/{id}` - Delete task
