@@ -6,7 +6,9 @@ pipeline {
         stage('git clone') {
             steps {
                 echo 'git clone'
-                git branch: 'main', url: 'https://github.com/ganeshkhairedevops/taskmaster.git'
+                def call(String GitUrl, String GitBranch){
+ 				 git url: "${GitUrl}", branch: "${GitBranch}"
+				}
             }
         }
         stage('build') {
