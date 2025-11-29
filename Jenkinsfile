@@ -1,4 +1,3 @@
-@Library('Shared') _
 pipeline {
     agent any
 
@@ -6,9 +5,7 @@ pipeline {
         stage('git clone') {
             steps {
                 echo 'git clone'
-                def call(String GitUrl, String GitBranch){
- 				 git url: "${GitUrl}", branch: "${GitBranch}"
-				}
+				git branch: 'main', url: 'https://github.com/ganeshkhairedevops/taskmaster.git'
             }
         }
         stage('build') {
