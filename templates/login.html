@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskMaster Pro - Login</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body { 
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; 
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        
+        .background-animation {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+        }
+        
+        .floating-shapes {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .shape1 { top: 20%; left: 10%; animation-delay: 0s; }
+        .shape2 { top: 60%; right: 10%; animation-delay: 2s; }
+        .shape3 { bottom: 20%; left: 20%; animation-delay: 4s; }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .login-container {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+        
+        .subtitle {
+            color: #666;
+            margin-bottom: 2rem;
+            font-size: 0.9rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+            position: relative;
+        }
+        
+        .form-group i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #999;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 1rem 1rem 1rem 3rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+        
+        .checkbox-group input[type="checkbox"] {
+            margin-right: 0.5rem;
+            width: auto;
+        }
+        
+        .checkbox-group label {
+            font-size: 0.9rem;
+            color: #666;
+            cursor: pointer;
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            width: 100%;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(102, 126, 234, 0.3);
+        }
+        
+        .toggle-link {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+        
+        .toggle-link:hover {
+            color: #764ba2;
+        }
+        
+        .error {
+            color: #e53e3e;
+            margin-bottom: 1rem;
+            padding: 0.75rem;
+            background: #fed7d7;
+            border-radius: 8px;
+            border-left: 4px solid #e53e3e;
+        }
+        
+        .features {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e2e8f0;
+        }
+        
+        .feature-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            font-size: 0.85rem;
+            color: #666;
+        }
+        
+        .feature-item i {
+            color: #667eea;
+            margin-right: 0.5rem;
+            width: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="background-animation">
+        <div class="floating-shapes shape1"></div>
+        <div class="floating-shapes shape2"></div>
+        <div class="floating-shapes shape3"></div>
+    </div>
+
+    <div class="login-container">
+        <div class="logo">🚀 TaskMaster Pro</div>
+        <div class="subtitle">Professional Task Management System</div>
+        
+        {% if error %}
+        <div class="error">
+            <i class="fas fa-exclamation-triangle"></i> {{ error }}
+        </div>
+        {% endif %}
+        
+        <form id="authForm" method="POST">
+            <div class="form-group">
+                <i class="fas fa-user"></i>
+                <input type="text" name="username" placeholder="Username" required>
+            </div>
+            <div class="form-group">
+                <i class="fas fa-lock"></i>
+                <input type="password" name="password" placeholder="Password" required>
+            </div>
+            <div class="checkbox-group" id="rememberGroup" style="display: none;">
+                <input type="checkbox" id="remember" name="remember">
+                <label for="remember">Remember me for 30 days</label>
+            </div>
+            <button type="submit" class="btn" id="submitBtn">
+                <i class="fas fa-sign-in-alt"></i> Login
+            </button>
+        </form>
+        
+        <p>
+            <span id="toggleText">Don't have an account?</span>
+            <a href="#" class="toggle-link" id="toggleLink">Create Account</a>
+        </p>
+        
+        <div class="features">
+            <div class="feature-item">
+                <i class="fas fa-shield-alt"></i>
+                <span>Secure authentication</span>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-tasks"></i>
+                <span>Personal task management</span>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-chart-bar"></i>
+                <span>Real-time statistics</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('authForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const toggleLink = document.getElementById('toggleLink');
+        const toggleText = document.getElementById('toggleText');
+        const rememberGroup = document.getElementById('rememberGroup');
+        let isLogin = true;
+
+        toggleLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            isLogin = !isLogin;
+            
+            if (isLogin) {
+                form.action = '/login';
+                submitBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Login';
+                toggleText.textContent = "Don't have an account?";
+                toggleLink.textContent = 'Create Account';
+                rememberGroup.style.display = 'flex';
+            } else {
+                form.action = '/register';
+                submitBtn.innerHTML = '<i class="fas fa-user-plus"></i> Create Account';
+                toggleText.textContent = 'Already have an account?';
+                toggleLink.textContent = 'Sign In';
+                rememberGroup.style.display = 'none';
+            }
+        });
+
+        // Show remember me checkbox by default for login
+        rememberGroup.style.display = 'flex';
+    </script>
+</body>
+</html>
