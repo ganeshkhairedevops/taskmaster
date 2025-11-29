@@ -22,8 +22,8 @@ pipeline {
                     usernameVariable: "dockerHubUser"
                  )]){
                 sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPass}"
-                sh "docker tag shoping ${env.dockerHubUser}/taskmaster"
-                sh "docker push ${env.dockerHubUser}/taskmaster:wq:latest"
+                sh "docker tag taskmaster ${env.dockerHubUser}/taskmaster"
+                sh "docker push ${env.dockerHubUser}/taskmaster:latest"
                 }
             }
         }
