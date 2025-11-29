@@ -6,7 +6,7 @@ pipeline {
         stage('git clone') {
             steps {
                 echo 'git clone'
-                clone("https://github.com/ganeshkhairedevops/taskmaster.git", "main")
+                git branch: 'main', url: 'https://github.com/ganeshkhairedevops/taskmaster.git'
             }
         }
 
@@ -38,4 +38,4 @@ pipeline {
             }
         }
     }
-}  // <-- closing brace for pipeline
+}
