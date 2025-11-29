@@ -6,7 +6,6 @@ pipeline {
         stage('git clone') {
             steps {
 				echo 'git clone'
-				script{
                    clone("https://github.com/ganeshkhairedevops/taskmaster.git", "main")
                }
             }
