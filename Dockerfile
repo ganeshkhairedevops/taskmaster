@@ -1,17 +1,31 @@
+# ===========================
+# Stage 1 — Build dependencies
+# ===========================
+FROM python:3.9-slim AS builder
+
+WORKDIR /app
+
+# Install build dependencies
+RUN apt-get update && apt-get install -y gcc && \
+    rm -rf /var/lib/apt/lists/*
+
+# Install dependencies into a wheel directory
+COPY requirements.txt .
+RUN pip wheel --no-cache-dir --wheel-dir /app/wheels -r requirements.txt
+
+
+# ===========================
+# Stage 2 — Final runtime image
+# ===========================
 FROM python:3.9-slim
 
 WORKDIR /app
 
-# Install system dependencies
-RUN apt-get update && apt-get install -y \
-    gcc \
-    && rm -rf /var/lib/apt/lists/*
+# Install only the built wheels (no gcc needed)
+COPY --from=builder /app/wheels /wheels
+RUN pip install --no-cache-dir /wheels/*
 
-# Copy requirements first for better caching
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
-
-# Copy application code
+# Copy code
 COPY app.py .
 COPY templates/ templates/
 
