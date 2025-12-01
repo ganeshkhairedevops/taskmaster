@@ -6,7 +6,7 @@ pipeline {
         stage('git clone') {
             steps {
                 echo 'git clone'
-                git branch: 'main', url: 'https://github.com/ganeshkhairedevops/taskmaster.git'
+                git branch: 'feature-k8s', url: 'https://github.com/ganeshkhairedevops/taskmaster.git'
             }
         }
 

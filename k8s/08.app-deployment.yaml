@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: taskmaster-app
+  namespace: taskmaster
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: taskmaster-app
+  template:
+    metadata:
+      labels:
+        app: taskmaster-app
+    spec:
+      containers:
+      - name: taskmaster
+        image: ganeshkhaire14/taskmaster:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 5000
+        env:
+        - name: DATABASE_URL
+          valueFrom:
+            configMapKeyRef:
+              name: taskmaster-config
+              key: DATABASE_URL
+        - name: SECRET_KEY
+          value: "your-secret-key-here"
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 5000
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 5000
+          initialDelaySeconds: 60
+          periodSeconds: 15
