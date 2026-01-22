@@ -9,7 +9,7 @@
 
 TaskMaster Pro is a modern, full-stack task management system built with Flask, PostgreSQL, and featuring a beautiful glassmorphism UI. It includes user authentication, real-time task updates, and comprehensive DevOps integration with Jenkins and Kubernetes.
 
-## ✨ Features
+## ✨ Features.
 
 - 🎨 Modern glassmorphism UI with responsive design
 - 🔐 Secure user authentication with session management
